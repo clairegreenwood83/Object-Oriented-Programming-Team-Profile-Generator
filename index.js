@@ -10,6 +10,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
+//output from the inquirer
+let team = []; 
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
@@ -62,15 +64,86 @@ function start () {
             },
         ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
-            answers.push(team);
+            team.push(manager);
         })
     }
 //call the function that will ask what type of employee will be created next
     createTeam();
 }
 
-//output from the inquirer
-let team = []; 
+function createTeam() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "choice",
+            message: "What team member would you like to create next?",
+            choices: ['Intern', 'Engineer', 'I do not want to add anything else'],
+        },
+    ]).then(userChoice => {
+        if (userChoice === "Engineer") {
+            createEngineer();
+        }
+        if  (userChoice === "Intern") {
+            createIntern();
+        }
+        else render(team);//when a user has finished adding new team members call render
+        
+    })
+}
 
-//when a user has finished adding new team members call render
-render(team);
+
+function createEngineer() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "engineerName",
+            message: "What is the engineer's name?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is the engineer's id?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is the engineer's email?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "engineerGitHub",
+            message: "What is the engineer's GitHub username?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+    ]).then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHub);
+        team.push(engineer);
+        })
+    
+    createTeam();
+}
+
+function createIntern()
