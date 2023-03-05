@@ -1,0 +1,28 @@
+{
+  "name": "object-oriented-programming-team-profile-generator",
+  "version": "1.0.0",
+  "description": "\"\"",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest --verbose test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clairegreenwood83/Object-Oriented-Programming-Team-Profile-Generator.git"
+  },
+  "keywords": [
+    "\"\""
+  ],
+  "author": "Claire Greenwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clairegreenwood83/Object-Oriented-Programming-Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/clairegreenwood83/Object-Oriented-Programming-Team-Profile-Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.5"
+  }
+}
