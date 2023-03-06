@@ -12,10 +12,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 //output from the inquirer
 let team = []; 
+console.log(team);
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 function start () {
+    createManager();
+}
     function createManager() {
         inquirer.prompt([
             {
@@ -62,15 +65,12 @@ function start () {
                     return "Please enter at least one character.";
                 }
             },
-        ]).then(answers => {
+        ]).then((answers) => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             team.push(manager);
             createTeam();
-        })
+        });
     }
-//call the function that will ask what type of employee will be created next
-    createManager();
-}
 
 function createTeam() {
     inquirer.prompt([
@@ -81,16 +81,16 @@ function createTeam() {
             choices: ['Intern', 'Engineer', 'I do not want to add anything else'],
         },
     ]).then(userChoice => {
-        if (userChoice.choice === "Engineer") {
+        if (userChoice.choices === "Engineer") {
             createEngineer();
         }
-        if  (userChoice.choice === "Intern") {
+        if  (userChoice.choices === "Intern") {
             createIntern();
         }
-        if (userChoice.choice === "I do not want to add anything else") {
+        if (userChoice.choices === "I do not want to add anything else") {
             buildTeam();
         }
-    })
+    });
 }
 
 
@@ -143,9 +143,8 @@ function createEngineer() {
     ]).then(answers => {
         const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         team.push(engineer);
+        createTeam();
         })
-    
-    createTeam();
 }
 
 function createIntern() {
@@ -197,14 +196,13 @@ function createIntern() {
     ]).then(answers => {
         const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         team.push(intern);
+        createTeam();
         })
-    
-    createTeam();
 }
 // let html = render(team);
 
 function buildTeam() {
     fs.writeFileSync(outputPath, render(team), "utf-8");
 }
-
+ 
 start();
