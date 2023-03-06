@@ -31,7 +31,7 @@ function start () {
             },
             {
                 type: "input",
-                id: "managerId",
+                name: "managerId",
                 message: "What is the team manager's ID?",
                 validate: answer => {
                     if (answer !== "") {
@@ -42,7 +42,7 @@ function start () {
             },
             {
                 type: "input",
-                email: "managerEmail",
+                name: "managerEmail",
                 message: "What is the team manager's email?",
                 validate: answer => {
                     if (answer !== "") {
@@ -53,7 +53,7 @@ function start () {
             },
             {
                 type: "input",
-                number: "managerOfficeNumber",
+                name: "managerOfficeNumber",
                 message: "What is the team manager's office number?",
                 validate: answer => {
                     if (answer !== "") {
@@ -65,29 +65,31 @@ function start () {
         ]).then(answers => {
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             team.push(manager);
+            createTeam();
         })
     }
 //call the function that will ask what type of employee will be created next
-    createTeam();
+    createManager();
 }
 
 function createTeam() {
     inquirer.prompt([
         {
-            type: "input",
-            name: "choice",
+            type: "list",
+            name: "choices",
             message: "What team member would you like to create next?",
             choices: ['Intern', 'Engineer', 'I do not want to add anything else'],
         },
     ]).then(userChoice => {
-        if (userChoice === "Engineer") {
+        if (userChoice.choice === "Engineer") {
             createEngineer();
         }
-        if  (userChoice === "Intern") {
+        if  (userChoice.choice === "Intern") {
             createIntern();
         }
-        else render(team);//when a user has finished adding new team members call render
-        
+        if (userChoice.choice === "I do not want to add anything else") {
+            buildTeam();
+        }
     })
 }
 
@@ -129,7 +131,7 @@ function createEngineer() {
         },
         {
             type: "input",
-            name: "engineerGitHub",
+            name: "engineerGithub",
             message: "What is the engineer's GitHub username?",
             validate: answer => {
                 if (answer !== "") {
@@ -139,11 +141,70 @@ function createEngineer() {
             }
         },
     ]).then(answers => {
-        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHub);
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         team.push(engineer);
         })
     
     createTeam();
 }
 
-function createIntern()
+function createIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: "What is the Intern's name?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "What is the interns's ID?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is the intern's email?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "What is the intern's school?",
+            validate: answer => {
+                if (answer !== "") {
+                    return true;
+                }
+                return "Please enter at least one character.";
+            }
+        },
+    ]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        team.push(intern);
+        })
+    
+    createTeam();
+}
+// let html = render(team);
+
+function buildTeam() {
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+}
+
+start();
