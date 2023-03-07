@@ -81,8 +81,8 @@ Create an HTML file using the HTML returned from the render function.
  - Clone this repo to a local git repository.
  - Install inquirer using the following command in the terminal:
    npm install --save inquirer@^8.0.0
-
- - The application will can be invoked by using the following command in the terminal:
+ - Open the index.js file and right click and select "open in integrated terminal".
+ - The application can then be invoked by using the following command in the terminal:
    node index.js
  - A series of questions will appear to gather information about team members, an example of such questions can been seen in the image below:
 
