@@ -76,10 +76,6 @@ Create an HTML file using the HTML returned from the render function.
  - Write it to a file named team.html in the output folder.
  - You can use the provided variable outputPath to target this location.
 
-The following image shows a mock-up of the generated HTML’s potential appearance and functionality:
-
-![14-object-oriented-programming-challenge-demo](https://user-images.githubusercontent.com/118351853/223426068-b3a39b28-0d99-408f-a62e-67c86be09f41.png)
-
 ## Deployment
 
  - Clone this repo to a local git repository.
@@ -88,8 +84,11 @@ The following image shows a mock-up of the generated HTML’s potential appearan
 
  - The application will can be invoked by using the following command in the terminal:
    node index.js
+ - A series of questions will appear to gather information about team members, an example of such questions can been seen in the image below:
 
-This is an example of how the webpage can look once the application is invoked and user input entered:
+<img width="1374" alt="Screenshot 2023-03-07 at 11 37 49" src="https://user-images.githubusercontent.com/118351853/223431246-8b783bc1-c411-493e-83c3-1232e3db6701.png">
+
+ - Once all of the team members have been entered, a html file will be created in the ouput folder entitled team.html. Right click on the team.html file and select open in default browser to view the information on the webpage. An example of how the webpage can look once the application is invoked and user input entered, can be seen below:
 
 ![_Users_clairegreenwood_bootcamp_week-twelve_Object-Oriented-Programming-Team-Profile-Generator_output_team html](https://user-images.githubusercontent.com/118351853/223426561-765555df-23ee-45c7-a376-003729d5475d.png)
 
