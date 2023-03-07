@@ -131,7 +131,7 @@ function createEngineer() {
         },
         {
             type: "input",
-            name: "engineerGithub",
+            name: "engineerGitHubUser",
             message: "What is the engineer's GitHub username?",
             validate: answer => {
                 if (answer !== "") {
@@ -141,7 +141,7 @@ function createEngineer() {
             }
         },
     ]).then(answers => {
-        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHubUser);
         team.push(engineer);
         createTeam();
         })

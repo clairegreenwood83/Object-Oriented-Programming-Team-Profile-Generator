@@ -9,10 +9,10 @@
 
 .employee-card {
     margin: 2vw;
-    min-height: 400px;
-    min-width: 300px;
+    min-width: 200px;
+    min-height: 300px;
     background-color: rgb(20, 114, 135);
-    border: none;
+    border-style: none;
 }
 
 .list-group-item {
@@ -22,3 +22,17 @@
 a {
     color: black;
 }
+
+.team-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card-title {
+    text-align: center;
+  }
+
+  .team-heading h1 {
+    font-size: 50px;
+  }
